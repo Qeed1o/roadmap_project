@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "tsc && concurrently 'tsc -w' 'nodemon src/index.ts'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.1.8",
+    "concurrently": "^5.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.6.2",
+    "tsx": "^1.0.0",
+    "typescript": "^3.7.5"
+  }
+}
