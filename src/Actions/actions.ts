@@ -2,7 +2,7 @@ import TaskList from "../Classes/taskList";
 import Task from "../Classes/task";
 
 class Actions{
-    private taskList : TaskList = new TaskList();
+    private taskList : TaskList = new TaskList(); // TODO: move it to global "state"
 
     getTaskList() : TaskList { return this.taskList;};
 
