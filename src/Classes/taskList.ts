@@ -1,18 +1,21 @@
+import { TaskListDTO } from "../DTO/TaskListDTO";
 import Task from "./task";
+import { TaskDTO } from "../DTO/TaskDTO";
 
-class TaskList{
-    private list: Task[];
+class TaskList implements TaskListDTO{
+    list: Task[];
 
     constructor(){
         this.list = [];
     }
 
-    push(task : Task) : void{
+    push(task : TaskDTO) : void{
         this.list.push(task);
     }
 
-    getTaskById(id: string) : Task[]{
-        return this.list.filter( (task: Task) => task.getId() === id );
+    getTaskById(id: String) : Task | undefined{
+        const task: Task | undefined = this.list.find( (task: Task) => task.id === id );
+        return task;
     }
 }
 

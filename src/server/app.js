@@ -4,15 +4,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var routing_1 = __importDefault(require("./routing"));
+var MainRouter_1 = __importDefault(require("../Routing/MainRouter"));
 var Server = /** @class */ (function () {
     function Server() {
-        this.port = 3000;
+        this.port = 3001;
         this.app = express_1.default();
-        this.router = new routing_1.default(this.app);
+        this.app.all('/*', function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            res.header("Content-Type", "application/json");
+            next();
+        });
+        this.app.set('json spaces', 2);
+        this.app.use(MainRouter_1.default);
     }
     Server.prototype.run = function () {
-        this.router.route();
         this.app.listen(this.port, function () {
             console.log("Listen...");
         });

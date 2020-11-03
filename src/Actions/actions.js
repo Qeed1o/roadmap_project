@@ -7,31 +7,42 @@ var taskList_1 = __importDefault(require("../Classes/taskList"));
 var task_1 = __importDefault(require("../Classes/task"));
 var Actions = /** @class */ (function () {
     function Actions() {
-        this.taskList = new taskList_1.default(); // TODO: move it to global "state"
+        this.taskList = new taskList_1.default();
     }
-    Actions.prototype.getTaskList = function () { return this.taskList; };
+    Actions.prototype.getAllTasks = function (res) { res.json(this.taskList); };
     ;
-    Actions.prototype.newTask = function (name) {
-        var task = new task_1.default(name);
-        this.taskList.push(task);
-        return task;
-    };
-    Actions.prototype.getTask = function (id) {
-        var task = this.taskList.getTaskById(id);
-        return task ? task[0] : "404.";
-    };
-    Actions.prototype.closeTask = function (id) {
-        var task = this.taskList.getTaskById(id);
-        if (task) {
-            task[0].setTimeEnd(new Date());
-            return ({
-                id: task[0].getId(),
-                name: task[0].getName(),
-                closed: task[0].isClosed(),
-            });
+    Actions.prototype.createTask = function (req, res) {
+        if (!req.params.name) {
+            res.send('No name');
         }
         else {
-            return ('404.');
+            var task = new task_1.default(req.params.name);
+            this.taskList.push(task);
+            res.json(task);
+        }
+    };
+    Actions.prototype.getTaskById = function (req, res) {
+        if (!req.params.id) {
+            res.send('Wrong Data');
+        }
+        else {
+            var task = this.taskList.getTaskById(req.params.id);
+            task ? res.json(task) : res.send("404.");
+        }
+    };
+    Actions.prototype.closeTaskById = function (req, res) {
+        if (!req.params.id) {
+            res.send('Wrong Data');
+        }
+        else {
+            var task = this.taskList.getTaskById(req.params.id);
+            if (task) {
+                task.close();
+                res.json(task);
+            }
+            else {
+                res.send('404.');
+            }
         }
     };
     return Actions;

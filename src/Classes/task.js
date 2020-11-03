@@ -4,25 +4,13 @@ var Task = /** @class */ (function () {
     function Task(name) {
         this.name = name;
         this.timeStart = new Date();
-        this.timeEnd = new Date();
+        this.timeEnd = new Date(0);
         this.id = Math.random().toString(26).slice(2);
-        this.closed = false;
+        this.isClosed = false;
     }
-    Task.prototype.getName = function () {
-        return this.name;
-    };
-    Task.prototype.getTimeStart = function () {
-        return this.timeStart;
-    };
-    Task.prototype.getId = function () {
-        return this.id;
-    };
-    Task.prototype.setTimeEnd = function (timeEnd) {
-        this.timeEnd = timeEnd;
-        this.closed = true;
-    };
-    Task.prototype.isClosed = function () {
-        return this.closed;
+    Task.prototype.close = function () {
+        this.timeEnd = new Date();
+        this.isClosed = true;
     };
     return Task;
 }());

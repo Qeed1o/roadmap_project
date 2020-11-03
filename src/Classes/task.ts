@@ -1,32 +1,18 @@
-class Task{
-    private timeStart : Date = new Date();
-    private timeEnd : Date = new Date();   
-    private id : String = Math.random().toString(26).slice(2);
-    private closed : Boolean = false;
+import { TaskDTO } from "../DTO/TaskDTO";
+
+class Task implements TaskDTO{
+    timeStart : Date = new Date(); 
+    timeEnd: Date = new Date(0);
+    id : String = Math.random().toString(26).slice(2);
+    isClosed : Boolean = false;
 
     constructor(
-        private name : String,
+        public name : String,
     ){}
 
-    getName() : String {
-        return this.name;
-    }
-    
-    getTimeStart() : Date {
-        return this.timeStart;
-    }
-
-    getId() : String{
-        return this.id;
-    }
-
-    setTimeEnd(timeEnd: Date) : void {
-        this.timeEnd = timeEnd;
-        this.closed = true;
-    }
-
-    isClosed(): Boolean {
-        return this.closed;
+    close(): void {
+        this.timeEnd = new Date();
+        this.isClosed = true;
     }
 }
 

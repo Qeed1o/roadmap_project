@@ -1,18 +1,25 @@
 import express from 'express';
-import Router from './routing'
+import mainRouter from '../Routing/MainRouter'
 
 class Server{
     private app : express.Application;
-    private port: number = 3000;
-    private router: Router;
+    private port: number = 3001;
 
     constructor(){
         this.app = express();
-        this.router = new Router(this.app);
+
+        this.app.all('/*', function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            res.header("Content-Type", "application/json");
+            next();
+        });
+
+        this.app.set('json spaces', 2)
+        this.app.use(mainRouter);
     }
 
     run(){
-        this.router.route();
         this.app.listen(this.port, function () {
             console.log("Listen...");
         });

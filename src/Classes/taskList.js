@@ -8,7 +8,8 @@ var TaskList = /** @class */ (function () {
         this.list.push(task);
     };
     TaskList.prototype.getTaskById = function (id) {
-        return this.list.filter(function (task) { return task.getId() === id; });
+        var task = this.list.find(function (task) { return task.id === id; });
+        return task;
     };
     return TaskList;
 }());
