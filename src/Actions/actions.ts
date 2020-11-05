@@ -33,7 +33,7 @@ export default class Actions{
             res.send('Wrong Data');
         }else{
             const task : TaskDTO | undefined = this.taskList.getTaskById(req.params.id);
-            if(task){
+            if(task && !task.isClosed){
                 task.close();
                 res.json(task);
             }else{

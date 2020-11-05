@@ -36,7 +36,7 @@ var Actions = /** @class */ (function () {
         }
         else {
             var task = this.taskList.getTaskById(req.params.id);
-            if (task) {
+            if (task && !task.isClosed) {
                 task.close();
                 res.json(task);
             }

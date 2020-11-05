@@ -10,7 +10,7 @@ class Server{
 
         this.app.all('/*', function(req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            res.header("Access-Control-Allow-Headers", "*");
             res.header("Content-Type", "application/json");
             next();
         });
