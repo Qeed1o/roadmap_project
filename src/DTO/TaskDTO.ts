@@ -1,6 +1,6 @@
 export interface TaskDTO{
     timeStart: Date,
-    timeEnd: Date,
+    timeEnd: Date | null,
     id: String,
     isClosed: Boolean,
     name: String,

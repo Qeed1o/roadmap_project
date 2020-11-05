@@ -4,7 +4,7 @@ var Task = /** @class */ (function () {
     function Task(name) {
         this.name = name;
         this.timeStart = new Date();
-        this.timeEnd = new Date(0);
+        this.timeEnd = null;
         this.id = Math.random().toString(26).slice(2);
         this.isClosed = false;
     }

@@ -11,9 +11,13 @@ export const GET_ROUTES: PathDTO[] = [
             action: (req: Request, res: Response) => taskListWorker.getAllTasks(res),
         },
         {
+            path: '/clear',
+            action: (req: Request, res: Response) => taskListWorker.clearTasks(req, res),
+        },
+        {
             path: '/:id',
             action: (req: Request, res: Response) => taskListWorker.getTaskById(req, res),
-        },
+        },        
     ]
 export const POST_ROUTES: PathDTO[] = [
         {

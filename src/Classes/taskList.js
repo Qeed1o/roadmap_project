@@ -11,6 +11,12 @@ var TaskList = /** @class */ (function () {
         var task = this.list.find(function (task) { return task.id === id; });
         return task;
     };
+    TaskList.prototype.clear = function () {
+        this.list = [];
+    };
+    TaskList.prototype.isEmpty = function () {
+        return this.list.length === 0;
+    };
     return TaskList;
 }());
 exports.default = TaskList;

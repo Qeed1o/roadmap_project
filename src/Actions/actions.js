@@ -45,6 +45,10 @@ var Actions = /** @class */ (function () {
             }
         }
     };
+    Actions.prototype.clearTasks = function (req, res) {
+        this.taskList.clear();
+        this.taskList.isEmpty() ? res.send('200') : res.send('502');
+    };
     return Actions;
 }());
 exports.default = Actions;

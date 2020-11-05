@@ -17,6 +17,14 @@ class TaskList implements TaskListDTO{
         const task: Task | undefined = this.list.find( (task: Task) => task.id === id );
         return task;
     }
+
+    clear(){
+        this.list = [];
+    }
+
+    isEmpty(){
+        return this.list.length === 0;
+    }
 }
 
 export default TaskList;

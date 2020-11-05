@@ -3,7 +3,6 @@ import {Request, Response} from 'express';
 import TaskList from "../Classes/taskList";
 import Task from "../Classes/task";
 import { TaskDTO } from '../DTO/TaskDTO';
-import { TaskListDTO } from '../DTO/TaskListDTO';
 
 export default class Actions{
     public taskList: TaskList = new TaskList();
@@ -41,5 +40,10 @@ export default class Actions{
                 res.send('404.')
             } 
         }
+    }
+
+    public clearTasks(req: Request, res: Response){
+        this.taskList.clear();
+        this.taskList.isEmpty() ? res.send('200') : res.send('502')
     }
 }

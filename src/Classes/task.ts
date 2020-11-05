@@ -2,7 +2,7 @@ import { TaskDTO } from "../DTO/TaskDTO";
 
 class Task implements TaskDTO{
     timeStart : Date = new Date(); 
-    timeEnd: Date = new Date(0);
+    timeEnd: Date | null = null;
     id : String = Math.random().toString(26).slice(2);
     isClosed : Boolean = false;
 
