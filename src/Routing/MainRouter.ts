@@ -1,13 +1,31 @@
 import express, {Request, Response} from 'express'
-import {paths, GET, POST} from './paths'
+import {paths, GET, POST, PUT, DELETE} from './paths'
 import PathDTO from '../DTO/PathDTO'
 
 const mainRouter = express.Router()
 
-paths.map((path: PathDTO) => {
-    path.method === GET ?
-        mainRouter.get(`${path.path}`, (req: Request, res: Response) => path.action(req,res))
-        : mainRouter.post(`${path.path}`, (req: Request, res: Response) => path.action(req,res))
+paths.map(({method, path, action} : PathDTO) => {
+    switch (method){
+        case GET:
+            mainRouter.get(`${path}`, (req: Request, res: Response) => action(req,res))
+            break;
+        
+        case POST:
+            mainRouter.post(`${path}`, (req: Request, res: Response) => action(req,res))
+            break;
+
+        case PUT:
+            mainRouter.put(`${path}`, (req: Request, res: Response) => action(req,res))
+            break;
+
+        case DELETE:
+            mainRouter.delete(`${path}`, (req: Request, res: Response) => action(req,res))
+            break;
+
+        default:
+            console.error(`Wrong route for ${path}`)
+            break;
+    }
 })
 
 

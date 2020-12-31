@@ -15,7 +15,21 @@ export default class Actions{
         }else{
             const task = new Task(req.params.name);
             this.taskList.push(task);
-            res.json(task);
+            res.json(this.taskList);
+        }
+    }
+
+    public makeTaskActiveById(req: Request, res: Response){
+        if(!req.params.id){
+            res.send('Wrong Data');
+        } else {
+            const task : Task | undefined = this.taskList.getTaskById(req.params.id);
+            if(task && !task.isActive){
+                task.setActive();
+                res.json(this.taskList);
+            }else{
+                res.send('404.')
+            }
         }
     }
 
@@ -35,7 +49,7 @@ export default class Actions{
             const task : TaskDTO | undefined = this.taskList.getTaskById(req.params.id);
             if(task && !task.isClosed){
                 task.close();
-                res.json(task);
+                res.json(this.taskList);
             }else{
                 res.send('404.')
             } 
@@ -45,5 +59,14 @@ export default class Actions{
     public clearTasks(req: Request, res: Response){
         this.taskList.clear();
         this.taskList.isEmpty() ? res.send('200') : res.send('502')
+    }
+
+    public deleteTaskById(req: Request, res: Response){
+        if(!req.params.id){
+            res.send('Wrong Data');
+        }else{
+            this.taskList.deleteById(req.params.id)
+            res.json(this.taskList)
+        }
     }
 }

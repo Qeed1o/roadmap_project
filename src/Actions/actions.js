@@ -18,7 +18,22 @@ var Actions = /** @class */ (function () {
         else {
             var task = new task_1.default(req.params.name);
             this.taskList.push(task);
-            res.json(task);
+            res.json(this.taskList);
+        }
+    };
+    Actions.prototype.makeTaskActiveById = function (req, res) {
+        if (!req.params.id) {
+            res.send('Wrong Data');
+        }
+        else {
+            var task = this.taskList.getTaskById(req.params.id);
+            if (task && !task.isActive) {
+                task.setActive();
+                res.json(this.taskList);
+            }
+            else {
+                res.send('404.');
+            }
         }
     };
     Actions.prototype.getTaskById = function (req, res) {
@@ -38,7 +53,7 @@ var Actions = /** @class */ (function () {
             var task = this.taskList.getTaskById(req.params.id);
             if (task && !task.isClosed) {
                 task.close();
-                res.json(task);
+                res.json(this.taskList);
             }
             else {
                 res.send('404.');
@@ -48,6 +63,15 @@ var Actions = /** @class */ (function () {
     Actions.prototype.clearTasks = function (req, res) {
         this.taskList.clear();
         this.taskList.isEmpty() ? res.send('200') : res.send('502');
+    };
+    Actions.prototype.deleteTaskById = function (req, res) {
+        if (!req.params.id) {
+            res.send('Wrong Data');
+        }
+        else {
+            this.taskList.deleteById(req.params.id);
+            res.json(this.taskList);
+        }
     };
     return Actions;
 }());

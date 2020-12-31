@@ -7,6 +7,8 @@ const taskListWorker: Actions = new Actions();
 
 export const GET = "GET"
 export const POST = "POST"
+export const PUT = "PUT"
+export const DELETE = "DELETE"
 
 export const paths: PathDTO[] = [
         {
@@ -33,5 +35,15 @@ export const paths: PathDTO[] = [
             method: POST,
             path: '/close/:id',
             action: (req: Request, res: Response) => taskListWorker.closeTaskById(req, res),
+        },
+        {
+            method: POST,
+            path: '/active/:id',
+            action: (req: Request, res: Response) => taskListWorker.makeTaskActiveById(req, res)
+        },
+        {
+            method: POST,
+            path: '/delete/:id',
+            action: (req: Request, res: Response) => taskListWorker.deleteTaskById(req, res)
         }
     ]

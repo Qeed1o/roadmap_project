@@ -17,6 +17,12 @@ var TaskList = /** @class */ (function () {
     TaskList.prototype.isEmpty = function () {
         return this.list.length === 0;
     };
+    TaskList.prototype.deleteById = function (id) {
+        var index = this.list.findIndex(function (task) { return task.id === id; });
+        if (index === -1)
+            return;
+        this.list.splice(index, 1);
+    };
     return TaskList;
 }());
 exports.default = TaskList;

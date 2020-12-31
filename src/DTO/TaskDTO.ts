@@ -3,7 +3,9 @@ export interface TaskDTO{
     timeEnd: Date | null,
     id: String,
     isClosed: Boolean,
+    isActive: Boolean,
     name: String,
 
-    close(): void
+    close(): void,
+    setActive(): void,
 }

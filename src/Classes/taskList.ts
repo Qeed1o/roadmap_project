@@ -25,6 +25,12 @@ class TaskList implements TaskListDTO{
     isEmpty(){
         return this.list.length === 0;
     }
+
+    deleteById(id: string) : void {
+        const index: number = this.list.findIndex( (task: Task) => task.id === id);
+        if (index === -1) return;
+        this.list.splice(index, 1);
+    }
 }
 
 export default TaskList;
