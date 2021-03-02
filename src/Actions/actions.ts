@@ -10,10 +10,11 @@ export default class Actions{
     public getAllTasks (res: Response) { res.json(this.taskList) };
 
     public createTask(req: Request, res: Response){
-        if(!req.params.name){
+        console.log(req.body)
+        if(!req.body.name){
             res.send('No name')
         }else{
-            const task = new Task(req.params.name);
+            const task = new Task(req.body.name, req.body.desc);
             this.taskList.push(task);
             res.json(this.taskList);
         }
@@ -24,8 +25,8 @@ export default class Actions{
             res.send('Wrong Data');
         } else {
             const task : Task | undefined = this.taskList.getTaskById(req.params.id);
-            if(task && !task.isActive){
-                task.setActive();
+            if(task){
+                task.toggleActive();
                 res.json(this.taskList);
             }else{
                 res.send('404.')

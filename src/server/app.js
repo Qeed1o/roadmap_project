@@ -5,10 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var MainRouter_1 = __importDefault(require("../Routing/MainRouter"));
+var bodyParser = require('body-parser');
 var Server = /** @class */ (function () {
     function Server() {
         this.port = 3001;
         this.app = express_1.default();
+        this.app.use(bodyParser.json());
         this.app.all('/*', function (req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "*");

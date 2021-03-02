@@ -28,7 +28,7 @@ export const paths: PathDTO[] = [
         },        
         {
             method: POST,
-            path: '/create/:name',
+            path: '/create',
             action: (req: Request, res: Response) => taskListWorker.createTask(req, res),
         },
         {

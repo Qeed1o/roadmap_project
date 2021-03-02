@@ -1,6 +1,8 @@
 import express from 'express';
 import mainRouter from '../Routing/MainRouter'
 
+const bodyParser = require('body-parser')
+
 class Server{
     private app : express.Application;
     private port: number = 3001;
@@ -8,13 +10,13 @@ class Server{
     constructor(){
         this.app = express();
 
+        this.app.use(bodyParser.json());
         this.app.all('/*', function(req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "*");
             res.header("Content-Type", "application/json");
             next();
         });
-
         this.app.set('json spaces', 2)
         this.app.use(mainRouter);
     }

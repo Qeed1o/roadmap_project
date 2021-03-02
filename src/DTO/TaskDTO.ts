@@ -5,7 +5,8 @@ export interface TaskDTO{
     isClosed: Boolean,
     isActive: Boolean,
     name: String,
+    description: String,
 
     close(): void,
-    setActive(): void,
+    toggleActive(): void,
 }

@@ -12,11 +12,12 @@ var Actions = /** @class */ (function () {
     Actions.prototype.getAllTasks = function (res) { res.json(this.taskList); };
     ;
     Actions.prototype.createTask = function (req, res) {
-        if (!req.params.name) {
+        console.log(req.body);
+        if (!req.body.name) {
             res.send('No name');
         }
         else {
-            var task = new task_1.default(req.params.name);
+            var task = new task_1.default(req.body.name, req.body.desc);
             this.taskList.push(task);
             res.json(this.taskList);
         }
@@ -27,8 +28,8 @@ var Actions = /** @class */ (function () {
         }
         else {
             var task = this.taskList.getTaskById(req.params.id);
-            if (task && !task.isActive) {
-                task.setActive();
+            if (task) {
+                task.toggleActive();
                 res.json(this.taskList);
             }
             else {

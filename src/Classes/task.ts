@@ -9,6 +9,7 @@ class Task implements TaskDTO{
 
     constructor(
         public name : String,
+        public description: String = ""
     ){}
 
     close(): void {
@@ -16,8 +17,8 @@ class Task implements TaskDTO{
         this.isClosed = true;
     }
 
-    setActive(): void {
-        this.isActive = true;
+    toggleActive(): void {
+        this.isActive = !this.isActive;
     }
 }
 
