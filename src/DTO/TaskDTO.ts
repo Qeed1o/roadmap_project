@@ -1,12 +1,14 @@
+import Task from "../Classes/task";
+
 export interface TaskDTO{
-    timeStart: Date,
-    timeEnd: Date | null,
-    id: String,
-    isClosed: Boolean,
-    isActive: Boolean,
-    name: String,
-    description: String,
+    timeStart?: Date,
+    timeEnd?: Date | null,
+    id: string,
+    isClosed?: boolean,
+    isActive?: boolean,
+    name: string,
+    desc?: string,
 
     close(): void,
-    toggleActive(): void,
+    toggleActive(): void,    
 }

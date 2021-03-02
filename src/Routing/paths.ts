@@ -33,13 +33,8 @@ export const paths: PathDTO[] = [
         },
         {
             method: POST,
-            path: '/close/:id',
-            action: (req: Request, res: Response) => taskListWorker.closeTaskById(req, res),
-        },
-        {
-            method: POST,
-            path: '/active/:id',
-            action: (req: Request, res: Response) => taskListWorker.makeTaskActiveById(req, res)
+            path: '/task/:id',
+            action: (req: Request, res: Response) => taskListWorker.updateTask(req, res),
         },
         {
             method: POST,

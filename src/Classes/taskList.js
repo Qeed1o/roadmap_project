@@ -11,6 +11,14 @@ var TaskList = /** @class */ (function () {
         var task = this.list.find(function (task) { return task.id === id; });
         return task;
     };
+    TaskList.prototype.getTaskIndexById = function (id) {
+        var index = this.list.findIndex(function (task) { return task.id === id; });
+        return index;
+    };
+    TaskList.prototype.setTaskById = function (task) {
+        var index = this.getTaskIndexById(task.id);
+        this.list[index] = task;
+    };
     TaskList.prototype.clear = function () {
         this.list = [];
     };

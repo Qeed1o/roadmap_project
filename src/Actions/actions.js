@@ -17,8 +17,30 @@ var Actions = /** @class */ (function () {
             res.send('No name');
         }
         else {
-            var task = new task_1.default(req.body.name, req.body.desc);
+            var task = new task_1.default(req.body.name, { desc: req.body.desc });
             this.taskList.push(task);
+            res.json(this.taskList);
+        }
+    };
+    Actions.prototype.updateTask = function (req, res) {
+        if (!req.body.id) {
+            res.json('No id provided');
+        }
+        else {
+            var task = this.taskList.getTaskById(req.body.id);
+            if (!task) {
+                res.send('No task found');
+                return;
+            }
+            var newTask = new task_1.default(task.name, {
+                desc: req.body.desc !== undefined ? req.body.desc : task.desc,
+                isClosed: req.body.isClosed !== undefined ? req.body.isClosed : task.isClosed,
+                isActive: req.body.isActive !== undefined ? req.body.isActive : task.isActive,
+                timeEnd: task.timeEnd,
+                id: req.body.id,
+                timeStart: task.timeStart
+            });
+            this.taskList.setTaskById(newTask);
             res.json(this.taskList);
         }
     };

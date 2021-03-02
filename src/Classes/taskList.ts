@@ -9,13 +9,23 @@ class TaskList implements TaskListDTO{
         this.list = [];
     }
 
-    push(task : TaskDTO) : void{
+    push(task : Task) : void{
         this.list.push(task);
     }
 
-    getTaskById(id: String) : Task | undefined{
+    getTaskById(id: string) : Task | undefined{
         const task: Task | undefined = this.list.find( (task: Task) => task.id === id );
         return task;
+    }
+
+    getTaskIndexById(id: string) : number {
+        const index: number = this.list.findIndex( (task: Task) => task.id === id );
+        return index;
+    }
+
+    setTaskById(task: Task): void {
+        const index = this.getTaskIndexById(task.id);
+        this.list[index] = task;
     }
 
     clear(){
