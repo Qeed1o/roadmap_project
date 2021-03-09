@@ -28,7 +28,7 @@ export default class Actions{
             if (!task){ res.send('No task found'); return }
             const newTask = new Task(task.name, {
                 desc: req.body.desc !== undefined ? req.body.desc : task.desc,
-                isClosed: req.body.isClosed !== undefined ? req.body.isClosed : task.isClosed,
+                isClosed: req.body.isClosed !== undefined && !task.isClosed ? req.body.isClosed : task.isClosed,
                 isActive: req.body.isActive !== undefined ? req.body.isActive : task.isActive,
                 timeEnd: task.timeEnd,
                 id: req.body.id,
